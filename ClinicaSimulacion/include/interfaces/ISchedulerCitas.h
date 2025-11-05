@@ -2,7 +2,6 @@
 #include "models/Cita.h"
 #include <vector>
 
-// Interfaz para el Objetivo Específico 2
 class ISchedulerCitas {
 public:
     virtual bool programarCita(const Cita& nuevaCita) = 0;

@@ -9,44 +9,42 @@
 #include "models/Medico.h"
 #include "models/Cita.h"
 
-// Implementaciones (los algoritmos que usaremos)
 #include "implementations/RegistroEficiente.h"
 #include "implementations/SchedulerOptimizado.h"
 #include "implementations/AsignadorBalanceado.h"
-#include "implementations/AsignadorSimple.h" // Incluimos el simple para comparar
+
+using namespace std;
 
 // --- Función Auxiliar para limpiar la consola (simulación) ---
 void limpiarPantalla() {
     for (int i = 0; i < 50; ++i) {
-        std::cout << std::endl;
+        cout << endl;
     }
 }
 
 // --- Función Auxiliar para esperar al usuario ---
 void esperarUsuario() {
-    std::cout << "\nPresiona Enter para continuar...";
-    // Limpia el buffer de entrada antes de esperar
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    std::cin.get();
+    cout << "\nPresiona Enter para continuar...";
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cin.get();
 }
 
 // --- Función Auxiliar para leer un entero de forma segura ---
 int leerOpcion() {
     int opcion;
-    while (!(std::cin >> opcion)) {
-        std::cout << "Error: Debes ingresar un numero. Intenta de nuevo: ";
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    while (!(cin >> opcion)) {
+        cout << "Error: Debes ingresar un número. Intenta de nuevo: ";
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
     }
-    // Limpia el buffer de entrada (el 'Enter' después del número)
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     return opcion;
 }
 
 // --- Función Auxiliar para leer texto ---
-std::string leerTexto() {
-    std::string texto;
-    std::getline(std::cin, texto);
+string leerTexto() {
+    string texto;
+    getline(cin, texto);
     return texto;
 }
 
@@ -54,170 +52,153 @@ std::string leerTexto() {
 int main() {
     // --- 1. INICIALIZACIÓN DEL SISTEMA ---
 
-    // Elegimos qué algoritmo de asignación usar (¡Aquí puedes cambiar!)
-    std::shared_ptr<IAsignadorPersonal> asignador =
-        std::make_shared<AsignadorBalanceado>(); // <-- ¡ALGORITMO ÓPTIMO!
-    // std::shared_ptr<IAsignadorPersonal> asignador =
-    //    std::make_shared<AsignadorSimple>(); // (Prueba con este para ver la diferencia)
+    shared_ptr<IAsignadorPersonal> asignador =
+        make_shared<AsignadorBalanceado>();
 
+    shared_ptr<IRegistroPacientes> registro =
+        make_shared<RegistroEficiente>();
+    shared_ptr<ISchedulerCitas> scheduler =
+        make_shared<SchedulerOptimizado>();
 
-    std::shared_ptr<IRegistroPacientes> registro =
-        std::make_shared<RegistroEficiente>();
-    std::shared_ptr<ISchedulerCitas> scheduler =
-        std::make_shared<SchedulerOptimizado>();
-
-    // "Base de datos" de médicos (con especialidades)
-    std::vector<Medico> medicosDisponibles = {
+    vector<Medico> medicosDisponibles = {
         {1, "Dr. House", "Cardiologia", 0},
         {2, "Dra. Grey", "Cirugia", 0},
         {3, "Dr. Shepherd", "Neurocirugia", 0},
-        {4, "Dr. Wilson", "Cardiologia", 0} // <-- ¡Hay 2 de Cardiología!
+        {4, "Dr. Wilson", "Cardiologia", 0}
     };
 
-    // "Base de datos" de pacientes (para que no esté vacío)
     registro->agregarPaciente({101, "Paciente A", "Historial A..."});
     registro->agregarPaciente({102, "Paciente B", "Historial B..."});
 
-    // Contador simple para IDs de Citas
     int proximoIdCita = 1;
 
     // --- 2. BUCLE PRINCIPAL DE LA APLICACIÓN (FRONTEND DE CONSOLA) ---
     bool corriendo = true;
     while (corriendo) {
         limpiarPantalla();
-        std::cout << "=========================================" << std::endl;
-        std::cout << "  SISTEMA DE GESTION - CLINICA RICARDO PALMA" << std::endl;
-        std::cout << "=========================================" << std::endl;
-        std::cout << "\n--- Modulo: Registro ---" << std::endl;
-        std::cout << "  1. Registrar nuevo paciente" << std::endl;
-        std::cout << "  2. Buscar paciente por ID" << std::endl;
-        std::cout << "\n--- Modulo: Citas y Asignacion ---" << std::endl;
-        std::cout << "  3. Programar Cita (con Asignacion Optima)" << std::endl;
-        std::cout << "  4. Ver carga actual de medicos" << std::endl;
-        std::cout << "\n  0. Salir" << std::endl;
-        std::cout << "\nSelecciona una opcion: ";
+        cout << "=========================================" << endl;
+        cout << "  SISTEMA DE GESTION - CLINICA RICARDO PALMA" << endl;
+        cout << "=========================================" << endl;
+        cout << "\n--- Modulo: Registro ---" << endl;
+        cout << "  1. Registrar nuevo paciente" << endl;
+        cout << "  2. Buscar paciente por ID" << endl;
+        cout << "\n--- Modulo: Citas y Asignacion ---" << endl;
+        cout << "  3. Programar Cita (con Asignacion Optima)" << endl;
+        cout << "  4. Ver carga actual de medicos" << endl;
+        cout << "\n  0. Salir" << endl;
+        cout << "\nSelecciona una opcion: ";
 
         int opcion = leerOpcion();
 
         switch (opcion) {
             case 1: { // REGISTRAR PACIENTE
                 limpiarPantalla();
-                std::cout << "--- 1. Registrar Nuevo Paciente ---" << std::endl;
+                cout << "--- 1. Registrar Nuevo Paciente ---" << endl;
                 Paciente nuevoPaciente;
-                std::cout << "Ingresa ID (numerico): ";
+                cout << "Ingresa ID (numerico): ";
                 nuevoPaciente.idPaciente = leerOpcion();
 
-                std::cout << "Ingresa Nombre: ";
+                cout << "Ingresa Nombre: ";
                 nuevoPaciente.nombre = leerTexto();
 
-                std::cout << "Ingresa Historial: ";
+                cout << "Ingresa Historial: ";
                 nuevoPaciente.historialMedico = leerTexto();
 
                 registro->agregarPaciente(nuevoPaciente);
-                std::cout << "\n¡Paciente '" << nuevoPaciente.nombre << "' registrado con exito!" << std::endl;
+                cout << "\n¡Paciente '" << nuevoPaciente.nombre << "' registrado con exito!" << endl;
                 esperarUsuario();
                 break;
             }
             case 2: { // BUSCAR PACIENTE
                 limpiarPantalla();
-                std::cout << "--- 2. Buscar Paciente por ID ---" << std::endl;
-                std::cout << "Ingresa ID del paciente a buscar: ";
+                cout << "--- 2. Buscar Paciente por ID ---" << endl;
+                cout << "Ingresa ID del paciente a buscar: ";
                 int idBuscar = leerOpcion();
 
                 auto resultado = registro->buscarPaciente(idBuscar);
                 if (resultado) {
-                    std::cout << "\nPaciente Encontrado:" << std::endl;
-                    std::cout << "  Nombre: " << resultado->nombre << std::endl;
-                    std::cout << "  Historial: " << resultado->historialMedico << std::endl;
+                    cout << "\nPaciente Encontrado:" << endl;
+                    cout << "  Nombre: " << resultado->nombre << endl;
+                    cout << "  Historial: " << resultado->historialMedico << endl;
                 } else {
-                    std::cout << "\nError: Paciente con ID " << idBuscar << " no encontrado." << std::endl;
+                    cout << "\nError: Paciente con ID " << idBuscar << " no encontrado." << endl;
                 }
                 esperarUsuario();
                 break;
             }
             case 3: { // PROGRAMAR CITA (FLUJO COMPLETO)
                 limpiarPantalla();
-                std::cout << "--- 3. Programar Cita (con Asignación Optima) ---" << std::endl;
+                cout << "--- 3. Programar Cita (con Asignación Óptima) ---" << endl;
 
-                // 1. Buscar al paciente
-                std::cout << "Ingresa ID del Paciente: ";
+                cout << "Ingresa ID del Paciente: ";
                 int idPaciente = leerOpcion();
                 auto pacienteOpt = registro->buscarPaciente(idPaciente);
 
                 if (!pacienteOpt) {
-                    std::cout << "\nError: Paciente con ID " << idPaciente << " no encontrado." << std::endl;
+                    cout << "\nError: Paciente con ID " << idPaciente << " no encontrado." << endl;
                     esperarUsuario();
                     break;
                 }
-                auto paciente = *pacienteOpt; // Tenemos el paciente
-                std::cout << "  Paciente: " << paciente.nombre << std::endl;
+                auto paciente = *pacienteOpt;
+                cout << "  Paciente: " << paciente.nombre << endl;
 
-                // 2. Pedir la especialidad
-                std::cout << "Ingresa Especialidad (Ej: Cardiologia, Cirugia): ";
-                std::string especialidad = leerTexto();
+                cout << "Ingresa Especialidad (Ej: Cardiologia, Cirugia): ";
+                string especialidad = leerTexto();
 
-                // 3. Pedir fecha y hora
-                std::cout << "Ingresa Fecha y Hora (Ej: 2025-11-05 10:00): ";
-                std::string fechaHora = leerTexto();
+                cout << "Ingresa Fecha y Hora (Ej: 2025-11-05 10:00): ";
+                string fechaHora = leerTexto();
 
-                // 4. LLAMAR AL ALGORITMO DE ASIGNACIÓN (Backend)
-                // El asignador ENCUENTRA al mejor médico (O(m) o O(1))
                 auto medicoOpt = asignador->asignarMedico(medicosDisponibles, especialidad);
 
                 if (!medicoOpt) {
-                    std::cout << "\nError: No se encontraron médicos para la especialidad '" << especialidad << "'." << std::endl;
+                    cout << "\nError: No se encontraron medicos para la especialidad '" << especialidad << "'." << endl;
                     esperarUsuario();
                     break;
                 }
-                auto medico = *medicoOpt; // Tenemos al médico óptimo
-                std::cout << "  Medico optimo encontrado (por carga): " << medico.nombre << std::endl;
+                auto medico = *medicoOpt;
+                cout << "  Medico óptimo encontrado (por carga): " << medico.nombre << endl;
 
-                // 5. LLAMAR AL ALGORITMO DE SCHEDULING (Backend)
                 Cita nuevaCita = {proximoIdCita, paciente.idPaciente, medico.idMedico, fechaHora};
 
-                // El scheduler (O(log k)) verifica si hay conflictos
                 bool exito = scheduler->programarCita(nuevaCita);
 
                 if (exito) {
-                    // 6. ACTUALIZAR EL ESTADO (Confirmar la cita)
-                    // Solo si la cita fue exitosa, incrementamos la carga del médico
                     for (auto& med : medicosDisponibles) {
                         if (med.idMedico == medico.idMedico) {
-                            med.cargaActual++; // ¡Actualizamos la carga!
+                            med.cargaActual++;
                             break;
                         }
                     }
-                    proximoIdCita++; // Incrementamos el ID único de cita
-                    std::cout << "\n¡Cita programada con exito!" << std::endl;
-                    std::cout << "  Paciente: " << paciente.nombre << std::endl;
-                    std::cout << "  Medico: " << medico.nombre << std::endl;
-                    std::cout << "  Fecha: " << fechaHora << std::endl;
+                    proximoIdCita++;
+                    cout << "\n¡Cita programada con éxito!" << endl;
+                    cout << "  Paciente: " << paciente.nombre << endl;
+                    cout << "  Médico: " << medico.nombre << endl;
+                    cout << "  Fecha: " << fechaHora << endl;
                 } else {
-                    // El médico estaba ocupado en esa fecha/hora
-                    std::cout << "\nError: ¡Conflicto de Horario!" << std::endl;
-                    std::cout << "El Dr. " << medico.nombre << " ya tiene una cita a las " << fechaHora << "." << std::endl;
+                    cout << "\nError: ¡Conflicto de Horario!" << endl;
+                    cout << "El Dr. " << medico.nombre << " ya tiene una cita a las " << fechaHora << "." << endl;
                 }
                 esperarUsuario();
                 break;
             }
             case 4: { // VER CARGA DE MÉDICOS
                 limpiarPantalla();
-                std::cout << "--- 4. Carga Actual de Medicos ---" << std::endl;
+                cout << "--- 4. Carga Actual de Medicos ---" << endl;
                 for (const auto& medico : medicosDisponibles) {
-                    std::cout << "  - " << medico.nombre
+                    cout << "  - " << medico.nombre
                               << " (" << medico.especialidad << "): "
-                              << medico.cargaActual << " pacientes" << std::endl;
+                              << medico.cargaActual << " pacientes" << endl;
                 }
                 esperarUsuario();
                 break;
             }
             case 0: { // SALIR
-                std::cout << "Cerrando el sistema..." << std::endl;
+                cout << "Cerrando el sistema..." << endl;
                 corriendo = false;
                 break;
             }
             default: {
-                std::cout << "Opcion no valida. Intentalo de nuevo." << std::endl;
+                cout << "Opcion no valida. Intentalo de nuevo." << endl;
                 esperarUsuario();
                 break;
             }

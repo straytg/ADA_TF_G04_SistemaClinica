@@ -1,23 +1,17 @@
 #include "implementations/AsignadorBalanceado.h"
-#include <limits>
+#include <limits> // Necesario para numeric_limits
 
-std::optional<Medico> AsignadorBalanceado::asignarMedico(
-    const std::vector<Medico>& medicosDisponibles,
-    const std::string& especialidad) const {
+using namespace std; // <-- AÑADIDO
 
-    // Algoritmo "Menor Carga por Especialidad" (Greedy)
-    // Complejidad: O(m) donde m es el número de médicos.
+optional<Medico> AsignadorBalanceado::asignarMedico(
+    const vector<Medico>& medicosDisponibles,
+    const string& especialidad) const {
 
-    int minCarga = std::numeric_limits<int>::max();
-    std::optional<Medico> medicoSeleccionado = std::nullopt;
+    int minCarga = numeric_limits<int>::max();
+    optional<Medico> medicoSeleccionado = nullopt;
 
-    // 1. Iterar sobre TODOS los médicos
     for (const auto& medico : medicosDisponibles) {
-
-        // 2. FILTRAR: Considerar solo a los de la especialidad correcta
         if (medico.especialidad == especialidad) {
-
-            // 3. COMPARAR: Encontrar el que tenga la menor carga
             if (medico.cargaActual < minCarga) {
                 minCarga = medico.cargaActual;
                 medicoSeleccionado = medico;
@@ -25,6 +19,5 @@ std::optional<Medico> AsignadorBalanceado::asignarMedico(
         }
     }
 
-    // Devuelve el médico encontrado (o std::nullopt si nadie de esa esp. existe)
     return medicoSeleccionado;
 }

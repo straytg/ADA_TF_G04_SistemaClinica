@@ -58,15 +58,6 @@ build CMakeFiles/ClinicaSimulacion.dir/src/implementations/AsignadorBalanceado.c
   TARGET_COMPILE_PDB = CMakeFiles\ClinicaSimulacion.dir\
   TARGET_PDB = ClinicaSimulacion.pdb
 
-build CMakeFiles/ClinicaSimulacion.dir/src/implementations/AsignadorSimple.cpp.obj: CXX_COMPILER__ClinicaSimulacion_unscanned_Debug C$:/Users/sebas/OneDrive/Escritorio/ADAClinic/ClinicaSimulacion/src/implementations/AsignadorSimple.cpp || cmake_object_order_depends_target_ClinicaSimulacion
-  DEP_FILE = CMakeFiles\ClinicaSimulacion.dir\src\implementations\AsignadorSimple.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -IC:/Users/sebas/OneDrive/Escritorio/ADAClinic/ClinicaSimulacion/include
-  OBJECT_DIR = CMakeFiles\ClinicaSimulacion.dir
-  OBJECT_FILE_DIR = CMakeFiles\ClinicaSimulacion.dir\src\implementations
-  TARGET_COMPILE_PDB = CMakeFiles\ClinicaSimulacion.dir\
-  TARGET_PDB = ClinicaSimulacion.pdb
-
 build CMakeFiles/ClinicaSimulacion.dir/src/implementations/RegistroEficiente.cpp.obj: CXX_COMPILER__ClinicaSimulacion_unscanned_Debug C$:/Users/sebas/OneDrive/Escritorio/ADAClinic/ClinicaSimulacion/src/implementations/RegistroEficiente.cpp || cmake_object_order_depends_target_ClinicaSimulacion
   DEP_FILE = CMakeFiles\ClinicaSimulacion.dir\src\implementations\RegistroEficiente.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
@@ -76,26 +67,8 @@ build CMakeFiles/ClinicaSimulacion.dir/src/implementations/RegistroEficiente.cpp
   TARGET_COMPILE_PDB = CMakeFiles\ClinicaSimulacion.dir\
   TARGET_PDB = ClinicaSimulacion.pdb
 
-build CMakeFiles/ClinicaSimulacion.dir/src/implementations/RegistroSimple.cpp.obj: CXX_COMPILER__ClinicaSimulacion_unscanned_Debug C$:/Users/sebas/OneDrive/Escritorio/ADAClinic/ClinicaSimulacion/src/implementations/RegistroSimple.cpp || cmake_object_order_depends_target_ClinicaSimulacion
-  DEP_FILE = CMakeFiles\ClinicaSimulacion.dir\src\implementations\RegistroSimple.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -IC:/Users/sebas/OneDrive/Escritorio/ADAClinic/ClinicaSimulacion/include
-  OBJECT_DIR = CMakeFiles\ClinicaSimulacion.dir
-  OBJECT_FILE_DIR = CMakeFiles\ClinicaSimulacion.dir\src\implementations
-  TARGET_COMPILE_PDB = CMakeFiles\ClinicaSimulacion.dir\
-  TARGET_PDB = ClinicaSimulacion.pdb
-
 build CMakeFiles/ClinicaSimulacion.dir/src/implementations/SchedulerOptimizado.cpp.obj: CXX_COMPILER__ClinicaSimulacion_unscanned_Debug C$:/Users/sebas/OneDrive/Escritorio/ADAClinic/ClinicaSimulacion/src/implementations/SchedulerOptimizado.cpp || cmake_object_order_depends_target_ClinicaSimulacion
   DEP_FILE = CMakeFiles\ClinicaSimulacion.dir\src\implementations\SchedulerOptimizado.cpp.obj.d
-  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
-  INCLUDES = -IC:/Users/sebas/OneDrive/Escritorio/ADAClinic/ClinicaSimulacion/include
-  OBJECT_DIR = CMakeFiles\ClinicaSimulacion.dir
-  OBJECT_FILE_DIR = CMakeFiles\ClinicaSimulacion.dir\src\implementations
-  TARGET_COMPILE_PDB = CMakeFiles\ClinicaSimulacion.dir\
-  TARGET_PDB = ClinicaSimulacion.pdb
-
-build CMakeFiles/ClinicaSimulacion.dir/src/implementations/SchedulerSimple.cpp.obj: CXX_COMPILER__ClinicaSimulacion_unscanned_Debug C$:/Users/sebas/OneDrive/Escritorio/ADAClinic/ClinicaSimulacion/src/implementations/SchedulerSimple.cpp || cmake_object_order_depends_target_ClinicaSimulacion
-  DEP_FILE = CMakeFiles\ClinicaSimulacion.dir\src\implementations\SchedulerSimple.cpp.obj.d
   FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
   INCLUDES = -IC:/Users/sebas/OneDrive/Escritorio/ADAClinic/ClinicaSimulacion/include
   OBJECT_DIR = CMakeFiles\ClinicaSimulacion.dir
@@ -120,7 +93,7 @@ build CMakeFiles/ClinicaSimulacion.dir/src/main.cpp.obj: CXX_COMPILER__ClinicaSi
 #############################################
 # Link the executable ClinicaSimulacion.exe
 
-build ClinicaSimulacion.exe: CXX_EXECUTABLE_LINKER__ClinicaSimulacion_Debug CMakeFiles/ClinicaSimulacion.dir/src/implementations/AsignadorBalanceado.cpp.obj CMakeFiles/ClinicaSimulacion.dir/src/implementations/AsignadorSimple.cpp.obj CMakeFiles/ClinicaSimulacion.dir/src/implementations/RegistroEficiente.cpp.obj CMakeFiles/ClinicaSimulacion.dir/src/implementations/RegistroSimple.cpp.obj CMakeFiles/ClinicaSimulacion.dir/src/implementations/SchedulerOptimizado.cpp.obj CMakeFiles/ClinicaSimulacion.dir/src/implementations/SchedulerSimple.cpp.obj CMakeFiles/ClinicaSimulacion.dir/src/main.cpp.obj
+build ClinicaSimulacion.exe: CXX_EXECUTABLE_LINKER__ClinicaSimulacion_Debug CMakeFiles/ClinicaSimulacion.dir/src/implementations/AsignadorBalanceado.cpp.obj CMakeFiles/ClinicaSimulacion.dir/src/implementations/RegistroEficiente.cpp.obj CMakeFiles/ClinicaSimulacion.dir/src/implementations/SchedulerOptimizado.cpp.obj CMakeFiles/ClinicaSimulacion.dir/src/main.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\ClinicaSimulacion.dir
